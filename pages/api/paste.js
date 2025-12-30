@@ -20,10 +20,10 @@ export default async function handler(req, res) {
          VALUES ($1, $2, $3, $4)`,
         [id, content, expiresAt, maxViews || null]
       );
-
+      const baseUrl =process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
       return res.status(200).json({
-        url: `http://localhost:3000/paste/${id}`
-      });
+        url: `${baseUrl}/paste/${id}`});
+
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: "Database error" });
